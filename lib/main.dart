@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttter_2025/sample/image_page.dart';
+import 'package:fluttter_2025/sample/net_page.dart';
+import 'package:fluttter_2025/sample/sp_page.dart';
 import 'package:fluttter_2025/sample/stateful_page.dart';
 import 'package:fluttter_2025/sample/stateless_page.dart';
 
@@ -46,9 +48,9 @@ class _MyAppState extends State<MyApp> {
         // 'TopTab': (BuildContext context) => TabbedAppBarPage(),
         // 'BottomTab': (BuildContext context) => BottomTabNavigatorPage(),
         // 'DrawerPage': (BuildContext context) => DrawerPage(),
-        // 'netPage': (BuildContext context) => NetPage(),
+        'netPage': (BuildContext context) => NetPage(),
         // 'FutureBuilderPage': (BuildContext context) => FutureBuilderPage(),
-        // 'sp': (BuildContext context) => SharedPreferencesPage(),
+        'sp': (BuildContext context) => SPPage(),
         // 'list1': (BuildContext context) => ListPage1(),
         // 'list2': (BuildContext context) => ListPage2(),
         // 'list3': (BuildContext context) => ListPage3(),
@@ -163,14 +165,14 @@ class _RouterNavigatorState extends State<RouterNavigator> {
         //     _item('侧拉导航', DrawerPage(), 'DrawerPage'),
         //   ],
         // ),
-        // Wrap(
-        //   spacing: 10,
-        //   children: [
-        //     _item('网络编程', NetPage(), 'netPage'),
-        //     _item('Future 练习', FutureBuilderPage(), 'FutureBuilderPage'),
-        //     _item('本地存储', SharedPreferencesPage(), 'sp'),
-        //   ],
-        // ),
+        Wrap(
+          spacing: 10,
+          children: [
+            _item('网络编程', NetPage(), 'netPage'),
+            // _item('Future 练习', FutureBuilderPage(), 'FutureBuilderPage'),
+            _item('本地存储', SPPage(), 'sp'),
+          ],
+        ),
         // Wrap(
         //   spacing: 10,
         //   children: [
