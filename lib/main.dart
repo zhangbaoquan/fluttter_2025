@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttter_2025/sample/image_page.dart';
+import 'package:fluttter_2025/sample/stateful_page.dart';
+import 'package:fluttter_2025/sample/stateless_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,12 +31,12 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: <String, WidgetBuilder>{
         // 'plugin': (BuildContext context) => PluginUse(),
-        // 'stateful': (BuildContext context) => StatefulUsePage(),
-        // 'stateless': (BuildContext context) => const StatelessUse(),
+        'stateful': (BuildContext context) => StatefulPage(),
+        'stateless': (BuildContext context) => const StatelessPage(),
         // 'layout': (BuildContext context) => FlutterLayoutPage(),
         // 'gesture': (BuildContext context) => const GesturePage(),
         // 'res': (BuildContext context) => ResPage(),
-        // 'lala': (BuildContext context) => LalaPage(),
+        'image_use': (BuildContext context) => ImagePage(),
         // 'lifecycle': (BuildContext context) => const WidgetLifecyclePage(),
         // 'AppLifecycle': (BuildContext context) => const AppLifecyclePage(),
         // 'animate': (BuildContext context) => AnimatePage(),
@@ -109,13 +111,13 @@ class _RouterNavigatorState extends State<RouterNavigator> {
         //     _item('资源使用', ResPage(), 'res'),
         //   ],
         // ),
-        // Wrap(
-        //   spacing: 10,
-        //   children: [
-        //     _item('StatefulUsePage', StatefulUsePage(), 'stateful'),
-        //     _item('StatelessUsePage', StatelessUse(), 'stateless'),
-        //   ],
-        // ),
+        Wrap(
+          spacing: 10,
+          children: [
+            _item('StatefulUsePage', StatefulPage(), 'stateful'),
+            _item('StatelessUsePage', StatelessPage(), 'stateless'),
+          ],
+        ),
         // Wrap(
         //   direction: Axis.horizontal,
         //   spacing: 10,
@@ -187,7 +189,7 @@ class _RouterNavigatorState extends State<RouterNavigator> {
         //     _item('拍照与图片处理', const PhotoPage(), '拍照与图片处理'),
         //   ],
         // ),
-        _item2('Image组件使用', ImagePage(), 'lala'),
+        _item2('Image组件使用', ImagePage(), 'image_use'),
       ],
     );
   }
