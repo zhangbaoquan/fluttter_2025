@@ -1,122 +1,246 @@
 import 'package:flutter/material.dart';
+import 'package:fluttter_2025/sample/image_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool useNightTheme = false;
+
+  // 默认显示日间模式
+  Brightness _brightness = Brightness.light;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      theme: ThemeData(brightness: _brightness, primarySwatch: Colors.blue),
+      home: Scaffold(
+        appBar: AppBar(title: const Text('导航使用')),
+        body: _MainItem(),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: <String, WidgetBuilder>{
+        // 'plugin': (BuildContext context) => PluginUse(),
+        // 'stateful': (BuildContext context) => StatefulUsePage(),
+        // 'stateless': (BuildContext context) => const StatelessUse(),
+        // 'layout': (BuildContext context) => FlutterLayoutPage(),
+        // 'gesture': (BuildContext context) => const GesturePage(),
+        // 'res': (BuildContext context) => ResPage(),
+        // 'lala': (BuildContext context) => LalaPage(),
+        // 'lifecycle': (BuildContext context) => const WidgetLifecyclePage(),
+        // 'AppLifecycle': (BuildContext context) => const AppLifecyclePage(),
+        // 'animate': (BuildContext context) => AnimatePage(),
+        // 'animate2': (BuildContext context) => AnimateWidgetPage(),
+        // 'animate3': (BuildContext context) => AnimateBuilderPage(),
+        // 'Hero1': (BuildContext context) => const HeroAnimationPage(),
+        // 'TopTab': (BuildContext context) => TabbedAppBarPage(),
+        // 'BottomTab': (BuildContext context) => BottomTabNavigatorPage(),
+        // 'DrawerPage': (BuildContext context) => DrawerPage(),
+        // 'netPage': (BuildContext context) => NetPage(),
+        // 'FutureBuilderPage': (BuildContext context) => FutureBuilderPage(),
+        // 'sp': (BuildContext context) => SharedPreferencesPage(),
+        // 'list1': (BuildContext context) => ListPage1(),
+        // 'list2': (BuildContext context) => ListPage2(),
+        // 'list3': (BuildContext context) => ListPage3(),
+        // 'list4': (BuildContext context) => ListPage4(),
+        // 'list5': (BuildContext context) => ListPage5(),
+      },
+    );
+  }
+
+  _MainItem() {
+    return Column(
+      children: [
+        SwitchListTile(
+          title: Text('当前是 ： ${useNightTheme ? '夜间模式' : '日间模式'}主题'),
+          value: useNightTheme,
+          onChanged: (value) {
+            setState(() {
+              if (value) {
+                _brightness = Brightness.dark;
+              } else {
+                _brightness = Brightness.light;
+              }
+              useNightTheme = value;
+            });
+          },
+        ),
+        const RouterNavigator(),
+      ],
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class RouterNavigator extends StatefulWidget {
+  const RouterNavigator({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<RouterNavigator> createState() => _RouterNavigatorState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _RouterNavigatorState extends State<RouterNavigator> {
+  // true 表示用路由名跳转，false 表示使用Navigator跳转
+  bool byName = false;
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return Column(
+      children: [
+        SwitchListTile(
+            title: Text('${byName ? '' : '不'}通过路由名跳转'),
+            value: byName,
+            onChanged: (value) {
+              setState(() {
+                byName = value;
+              });
+            }),
+        // Wrap(
+        //   spacing: 10,
+        //   children: [
+        //     _item('插件使用', PluginUse(), 'plugin'),
+        //     _item('资源使用', ResPage(), 'res'),
+        //   ],
+        // ),
+        // Wrap(
+        //   spacing: 10,
+        //   children: [
+        //     _item('StatefulUsePage', StatefulUsePage(), 'stateful'),
+        //     _item('StatelessUsePage', StatelessUse(), 'stateless'),
+        //   ],
+        // ),
+        // Wrap(
+        //   direction: Axis.horizontal,
+        //   spacing: 10,
+        //   alignment: WrapAlignment.center,
+        //   children: [
+        //     _item('layout', FlutterLayoutPage(), 'layout'),
+        //     _item('手势处理', GesturePage(), 'gesture'),
+        //   ],
+        // ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Padding(
+        //       padding: const EdgeInsets.symmetric(
+        //         horizontal: 10,
+        //       ),
+        //       child: _item('组件生命周期', WidgetLifecyclePage(), 'lifecycle'),
+        //     ),
+        //     Padding(
+        //       padding: const EdgeInsets.symmetric(
+        //         horizontal: 10,
+        //       ),
+        //       child: _item('应用生命周期', AppLifecyclePage(), 'AppLifecycle'),
+        //     ),
+        //   ],
+        // ),
+        // Wrap(
+        //   direction: Axis.horizontal,
+        //   alignment: WrapAlignment.center,
+        //   spacing: 10,
+        //   children: [
+        //     _item('动画', AnimatePage(), 'animate'),
+        //     _item('动画2', AnimateWidgetPage(), 'animate2'),
+        //     _item('动画3', AnimateBuilderPage(), 'animate3'),
+        //     _item('Hero 动画1', HeroAnimationPage(), 'Hero1'),
+        //   ],
+        // ),
+        // Wrap(
+        //   spacing: 10,
+        //   children: [
+        //     _item('顶部导航', TabbedAppBarPage(), 'TopTab'),
+        //     _item('底部导航', BottomTabNavigatorPage(), 'BottomTab'),
+        //     _item('侧拉导航', DrawerPage(), 'DrawerPage'),
+        //   ],
+        // ),
+        // Wrap(
+        //   spacing: 10,
+        //   children: [
+        //     _item('网络编程', NetPage(), 'netPage'),
+        //     _item('Future 练习', FutureBuilderPage(), 'FutureBuilderPage'),
+        //     _item('本地存储', SharedPreferencesPage(), 'sp'),
+        //   ],
+        // ),
+        // Wrap(
+        //   spacing: 10,
+        //   children: [
+        //     _item('列表1', ListPage1(), 'list1'),
+        //     _item('可展开列表', ListPage2(), 'list2'),
+        //     _item('网格布局', ListPage3(), 'list3'),
+        //     _item('下拉刷新', ListPage4(), 'list4'),
+        //     _item('Channel 通信', ListPage5(), 'list5'),
+        //   ],
+        // ),
+        // Wrap(
+        //   spacing: 10,
+        //   children: [
+        //     _item('上传页面', const UploadPage(), '上传页面'),
+        //     _item('图片选择页面', const ImagePickerPage(), '图片选择页面'),
+        //     _item('拍照与图片处理', const PhotoPage(), '拍照与图片处理'),
+        //   ],
+        // ),
+        _item2('Image组件使用', ImagePage(), 'lala'),
+      ],
+    );
+  }
+
+  _item(String title, page, String routeName) {
+    return ElevatedButton(
+      onPressed: () {
+        // true 表示用路由名跳转，false 表示使用Navigator跳转
+        if (byName) {
+          Navigator.pushNamed(context, routeName);
+        } else {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => page));
+        }
+      },
+      child: Text(title),
+    );
+  }
+
+  _item2(String title, page, String routeName) {
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      transform: Matrix4.rotationZ(.2),
+      width: 180,
+      height: 50,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+            gradient:
+            LinearGradient(colors: [Colors.red, Colors.orange.shade700]),
+            // 渐变
+            borderRadius: BorderRadius.circular(3),
+            boxShadow: const [
+              // 阴影
+              BoxShadow(
+                  color: Colors.black54,
+                  offset: Offset(2.0, 2.0),
+                  blurRadius: 4.0)
+            ]),
+        child: Center(
+          child: GestureDetector(
+            onTap: () {
+              // true 表示用路由名跳转，false 表示使用Navigator跳转
+              if (byName) {
+                Navigator.pushNamed(context, routeName);
+              } else {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => page));
+              }
+            },
+            child: Transform.scale(scale: 1.5, child: Text(title)),
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
