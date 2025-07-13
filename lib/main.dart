@@ -3,10 +3,14 @@ import 'package:fluttter_2025/sample/anim_page1.dart';
 import 'package:fluttter_2025/sample/anim_page2.dart';
 import 'package:fluttter_2025/sample/anim_page3.dart';
 import 'package:fluttter_2025/sample/anim_page4.dart';
+import 'package:fluttter_2025/sample/gesture_page.dart';
 import 'package:fluttter_2025/sample/image_page.dart';
+import 'package:fluttter_2025/sample/layout_page.dart';
 import 'package:fluttter_2025/sample/lifecycle_app_page.dart';
 import 'package:fluttter_2025/sample/lifecycle_widget_page.dart';
 import 'package:fluttter_2025/sample/net_page.dart';
+import 'package:fluttter_2025/sample/plugin_color_page.dart';
+import 'package:fluttter_2025/sample/res_page.dart';
 import 'package:fluttter_2025/sample/sp_page.dart';
 import 'package:fluttter_2025/sample/stateful_page.dart';
 import 'package:fluttter_2025/sample/stateless_page.dart';
@@ -19,7 +23,7 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  State<StatefulWidget> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -38,12 +42,12 @@ class _MyAppState extends State<MyApp> {
         body: _MainItem(),
       ),
       routes: <String, WidgetBuilder>{
-        // 'plugin': (BuildContext context) => PluginUse(),
+        'plugin': (BuildContext context) => PluginUse(),
         'stateful': (BuildContext context) => StatefulPage(),
         'stateless': (BuildContext context) => const StatelessPage(),
-        // 'layout': (BuildContext context) => FlutterLayoutPage(),
-        // 'gesture': (BuildContext context) => const GesturePage(),
-        // 'res': (BuildContext context) => ResPage(),
+        'layout': (BuildContext context) => FlutterLayoutPage(),
+        'gesture': (BuildContext context) => const GesturePage(),
+        'res': (BuildContext context) => ResPage(),
         'image_use': (BuildContext context) => ImagePage(),
         'lifecycle': (BuildContext context) => const WidgetLifecyclePage(),
         'AppLifecycle': (BuildContext context) => const AppLifecyclePage(),
@@ -115,8 +119,8 @@ class _RouterNavigatorState extends State<RouterNavigator> {
         // Wrap(
         //   spacing: 10,
         //   children: [
-        //     _item('插件使用', PluginUse(), 'plugin'),
-        //     _item('资源使用', ResPage(), 'res'),
+            _item('插件使用', PluginUse(), 'plugin'),
+            _item('资源使用', ResPage(), 'res'),
         //   ],
         // ),
         Wrap(
@@ -126,15 +130,15 @@ class _RouterNavigatorState extends State<RouterNavigator> {
             _item('StatelessUsePage', StatelessPage(), 'stateless'),
           ],
         ),
-        // Wrap(
-        //   direction: Axis.horizontal,
-        //   spacing: 10,
-        //   alignment: WrapAlignment.center,
-        //   children: [
-        //     _item('layout', FlutterLayoutPage(), 'layout'),
-        //     _item('手势处理', GesturePage(), 'gesture'),
-        //   ],
-        // ),
+        Wrap(
+          direction: Axis.horizontal,
+          spacing: 10,
+          alignment: WrapAlignment.center,
+          children: [
+            _item('layout', FlutterLayoutPage(), 'layout'),
+            _item('手势处理', GesturePage(), 'gesture'),
+          ],
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
