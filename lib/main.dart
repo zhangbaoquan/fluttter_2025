@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttter_2025/sample/image_page.dart';
+import 'package:fluttter_2025/sample/lifecycle_app_page.dart';
+import 'package:fluttter_2025/sample/lifecycle_widget_page.dart';
 import 'package:fluttter_2025/sample/net_page.dart';
 import 'package:fluttter_2025/sample/sp_page.dart';
 import 'package:fluttter_2025/sample/stateful_page.dart';
@@ -39,8 +41,8 @@ class _MyAppState extends State<MyApp> {
         // 'gesture': (BuildContext context) => const GesturePage(),
         // 'res': (BuildContext context) => ResPage(),
         'image_use': (BuildContext context) => ImagePage(),
-        // 'lifecycle': (BuildContext context) => const WidgetLifecyclePage(),
-        // 'AppLifecycle': (BuildContext context) => const AppLifecyclePage(),
+        'lifecycle': (BuildContext context) => const WidgetLifecyclePage(),
+        'AppLifecycle': (BuildContext context) => const AppLifecyclePage(),
         // 'animate': (BuildContext context) => AnimatePage(),
         // 'animate2': (BuildContext context) => AnimateWidgetPage(),
         // 'animate3': (BuildContext context) => AnimateBuilderPage(),
@@ -129,23 +131,23 @@ class _RouterNavigatorState extends State<RouterNavigator> {
         //     _item('手势处理', GesturePage(), 'gesture'),
         //   ],
         // ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Padding(
-        //       padding: const EdgeInsets.symmetric(
-        //         horizontal: 10,
-        //       ),
-        //       child: _item('组件生命周期', WidgetLifecyclePage(), 'lifecycle'),
-        //     ),
-        //     Padding(
-        //       padding: const EdgeInsets.symmetric(
-        //         horizontal: 10,
-        //       ),
-        //       child: _item('应用生命周期', AppLifecyclePage(), 'AppLifecycle'),
-        //     ),
-        //   ],
-        // ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: _item('组件生命周期', WidgetLifecyclePage(), 'lifecycle'),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: _item('应用生命周期', AppLifecyclePage(), 'AppLifecycle'),
+            ),
+          ],
+        ),
         // Wrap(
         //   direction: Axis.horizontal,
         //   alignment: WrapAlignment.center,
