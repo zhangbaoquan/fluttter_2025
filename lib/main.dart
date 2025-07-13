@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttter_2025/sample/anim_page1.dart';
+import 'package:fluttter_2025/sample/anim_page2.dart';
+import 'package:fluttter_2025/sample/anim_page3.dart';
+import 'package:fluttter_2025/sample/anim_page4.dart';
 import 'package:fluttter_2025/sample/image_page.dart';
 import 'package:fluttter_2025/sample/lifecycle_app_page.dart';
 import 'package:fluttter_2025/sample/lifecycle_widget_page.dart';
@@ -43,10 +47,10 @@ class _MyAppState extends State<MyApp> {
         'image_use': (BuildContext context) => ImagePage(),
         'lifecycle': (BuildContext context) => const WidgetLifecyclePage(),
         'AppLifecycle': (BuildContext context) => const AppLifecyclePage(),
-        // 'animate': (BuildContext context) => AnimatePage(),
-        // 'animate2': (BuildContext context) => AnimateWidgetPage(),
-        // 'animate3': (BuildContext context) => AnimateBuilderPage(),
-        // 'Hero1': (BuildContext context) => const HeroAnimationPage(),
+        'animate': (BuildContext context) => AnimPage(),
+        'animate2': (BuildContext context) => AnimateWidgetPage(),
+        'animate3': (BuildContext context) => AnimateBuilderPage(),
+        'Hero1': (BuildContext context) => const HeroAnimationPage(),
         // 'TopTab': (BuildContext context) => TabbedAppBarPage(),
         // 'BottomTab': (BuildContext context) => BottomTabNavigatorPage(),
         // 'DrawerPage': (BuildContext context) => DrawerPage(),
@@ -148,17 +152,17 @@ class _RouterNavigatorState extends State<RouterNavigator> {
             ),
           ],
         ),
-        // Wrap(
-        //   direction: Axis.horizontal,
-        //   alignment: WrapAlignment.center,
-        //   spacing: 10,
-        //   children: [
-        //     _item('动画', AnimatePage(), 'animate'),
-        //     _item('动画2', AnimateWidgetPage(), 'animate2'),
-        //     _item('动画3', AnimateBuilderPage(), 'animate3'),
-        //     _item('Hero 动画1', HeroAnimationPage(), 'Hero1'),
-        //   ],
-        // ),
+        Wrap(
+          direction: Axis.horizontal,
+          alignment: WrapAlignment.center,
+          spacing: 10,
+          children: [
+            _item('传统补间动画', AnimPage(), 'animate'),
+            _item('AnimatedWidget 动画', AnimateWidgetPage(), 'animate2'),
+            _item('AnimateBuild', AnimateBuilderPage(), 'animate3'),
+            _item('Hero 动画', HeroAnimationPage(), 'Hero1'),
+          ],
+        ),
         // Wrap(
         //   spacing: 10,
         //   children: [
