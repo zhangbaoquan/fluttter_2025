@@ -3,7 +3,10 @@ import 'package:fluttter_2025/sample/anim_page1.dart';
 import 'package:fluttter_2025/sample/anim_page2.dart';
 import 'package:fluttter_2025/sample/anim_page3.dart';
 import 'package:fluttter_2025/sample/anim_page4.dart';
+import 'package:fluttter_2025/sample/bottom_navigator_page.dart';
 import 'package:fluttter_2025/sample/channel_page.dart';
+import 'package:fluttter_2025/sample/drawer_page.dart';
+import 'package:fluttter_2025/sample/future_builder_page.dart';
 import 'package:fluttter_2025/sample/gesture_page.dart';
 import 'package:fluttter_2025/sample/image_page.dart';
 import 'package:fluttter_2025/sample/layout_page.dart';
@@ -19,6 +22,7 @@ import 'package:fluttter_2025/sample/res_page.dart';
 import 'package:fluttter_2025/sample/sp_page.dart';
 import 'package:fluttter_2025/sample/stateful_page.dart';
 import 'package:fluttter_2025/sample/stateless_page.dart';
+import 'package:fluttter_2025/sample/top_navigator_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,11 +64,11 @@ class _MyAppState extends State<MyApp> {
         'animate2': (BuildContext context) => AnimateWidgetPage(),
         'animate3': (BuildContext context) => AnimateBuilderPage(),
         'Hero1': (BuildContext context) => const HeroAnimationPage(),
-        // 'TopTab': (BuildContext context) => TabbedAppBarPage(),
-        // 'BottomTab': (BuildContext context) => BottomTabNavigatorPage(),
-        // 'DrawerPage': (BuildContext context) => DrawerPage(),
+        'TopTab': (BuildContext context) => TopNavigatorBarPage(),
+        'BottomTab': (BuildContext context) => BottomTabNavigatorPage(),
+        'DrawerPage': (BuildContext context) => DrawerPage(),
         'netPage': (BuildContext context) => NetPage(),
-        // 'FutureBuilderPage': (BuildContext context) => FutureBuilderPage(),
+        'FutureBuilderPage': (BuildContext context) => FutureBuilderPage(),
         'sp': (BuildContext context) => SPPage(),
         'list1': (BuildContext context) => ListPage1(),
         'list2': (BuildContext context) => ListPage2(),
@@ -169,19 +173,19 @@ class _RouterNavigatorState extends State<RouterNavigator> {
             _item('Hero 动画', HeroAnimationPage(), 'Hero1'),
           ],
         ),
-        // Wrap(
-        //   spacing: 10,
-        //   children: [
-        //     _item('顶部导航', TabbedAppBarPage(), 'TopTab'),
-        //     _item('底部导航', BottomTabNavigatorPage(), 'BottomTab'),
-        //     _item('侧拉导航', DrawerPage(), 'DrawerPage'),
-        //   ],
-        // ),
+        Wrap(
+          spacing: 10,
+          children: [
+            _item('顶部导航', TopNavigatorBarPage(), 'TopTab'),
+            _item('底部导航', BottomTabNavigatorPage(), 'BottomTab'),
+            _item('侧拉导航', DrawerPage(), 'DrawerPage'),
+          ],
+        ),
         Wrap(
           spacing: 10,
           children: [
             _item('网络编程', NetPage(), 'netPage'),
-            // _item('Future 练习', FutureBuilderPage(), 'FutureBuilderPage'),
+            _item('Future 练习', FutureBuilderPage(), 'FutureBuilderPage'),
             _item('本地存储', SPPage(), 'sp'),
           ],
         ),
