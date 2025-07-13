@@ -3,11 +3,16 @@ import 'package:fluttter_2025/sample/anim_page1.dart';
 import 'package:fluttter_2025/sample/anim_page2.dart';
 import 'package:fluttter_2025/sample/anim_page3.dart';
 import 'package:fluttter_2025/sample/anim_page4.dart';
+import 'package:fluttter_2025/sample/channel_page.dart';
 import 'package:fluttter_2025/sample/gesture_page.dart';
 import 'package:fluttter_2025/sample/image_page.dart';
 import 'package:fluttter_2025/sample/layout_page.dart';
 import 'package:fluttter_2025/sample/lifecycle_app_page.dart';
 import 'package:fluttter_2025/sample/lifecycle_widget_page.dart';
+import 'package:fluttter_2025/sample/list1_page.dart';
+import 'package:fluttter_2025/sample/list2_page.dart';
+import 'package:fluttter_2025/sample/list3_page.dart';
+import 'package:fluttter_2025/sample/list4_page.dart';
 import 'package:fluttter_2025/sample/net_page.dart';
 import 'package:fluttter_2025/sample/plugin_color_page.dart';
 import 'package:fluttter_2025/sample/res_page.dart';
@@ -39,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(brightness: _brightness, primarySwatch: Colors.blue),
       home: Scaffold(
         appBar: AppBar(title: const Text('导航使用')),
-        body: _MainItem(),
+        body: _mainItem(),
       ),
       routes: <String, WidgetBuilder>{
         'plugin': (BuildContext context) => PluginUse(),
@@ -61,16 +66,16 @@ class _MyAppState extends State<MyApp> {
         'netPage': (BuildContext context) => NetPage(),
         // 'FutureBuilderPage': (BuildContext context) => FutureBuilderPage(),
         'sp': (BuildContext context) => SPPage(),
-        // 'list1': (BuildContext context) => ListPage1(),
-        // 'list2': (BuildContext context) => ListPage2(),
-        // 'list3': (BuildContext context) => ListPage3(),
-        // 'list4': (BuildContext context) => ListPage4(),
-        // 'list5': (BuildContext context) => ListPage5(),
+        'list1': (BuildContext context) => ListPage1(),
+        'list2': (BuildContext context) => ListPage2(),
+        'list3': (BuildContext context) => ListPage3(),
+        'list4': (BuildContext context) => ListPage4(),
+        'channel': (BuildContext context) => ChannelPage(),
       },
     );
   }
 
-  _MainItem() {
+  _mainItem() {
     return Column(
       children: [
         SwitchListTile(
@@ -109,20 +114,21 @@ class _RouterNavigatorState extends State<RouterNavigator> {
     return Column(
       children: [
         SwitchListTile(
-            title: Text('${byName ? '' : '不'}通过路由名跳转'),
-            value: byName,
-            onChanged: (value) {
-              setState(() {
-                byName = value;
-              });
-            }),
-        // Wrap(
-        //   spacing: 10,
-        //   children: [
+          title: Text('${byName ? '' : '不'}通过路由名跳转'),
+          value: byName,
+          onChanged: (value) {
+            setState(() {
+              byName = value;
+            });
+          },
+        ),
+        Wrap(
+          spacing: 10,
+          children: [
             _item('插件使用', PluginUse(), 'plugin'),
             _item('资源使用', ResPage(), 'res'),
-        //   ],
-        // ),
+          ],
+        ),
         Wrap(
           spacing: 10,
           children: [
@@ -143,15 +149,11 @@ class _RouterNavigatorState extends State<RouterNavigator> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: _item('组件生命周期', WidgetLifecyclePage(), 'lifecycle'),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: _item('应用生命周期', AppLifecyclePage(), 'AppLifecycle'),
             ),
           ],
@@ -183,16 +185,16 @@ class _RouterNavigatorState extends State<RouterNavigator> {
             _item('本地存储', SPPage(), 'sp'),
           ],
         ),
-        // Wrap(
-        //   spacing: 10,
-        //   children: [
-        //     _item('列表1', ListPage1(), 'list1'),
-        //     _item('可展开列表', ListPage2(), 'list2'),
-        //     _item('网格布局', ListPage3(), 'list3'),
-        //     _item('下拉刷新', ListPage4(), 'list4'),
-        //     _item('Channel 通信', ListPage5(), 'list5'),
-        //   ],
-        // ),
+        Wrap(
+          spacing: 10,
+          children: [
+            _item('列表1', ListPage1(), 'list1'),
+            _item('可展开列表', ListPage2(), 'list2'),
+            _item('网格布局', ListPage3(), 'list3'),
+            _item('下拉刷新', ListPage4(), 'list4'),
+            _item('Channel 通信', ChannelPage(), 'channel'),
+          ],
+        ),
         // Wrap(
         //   spacing: 10,
         //   children: [
@@ -214,7 +216,9 @@ class _RouterNavigatorState extends State<RouterNavigator> {
           Navigator.pushNamed(context, routeName);
         } else {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => page));
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
         }
       },
       child: Text(title),
@@ -229,17 +233,20 @@ class _RouterNavigatorState extends State<RouterNavigator> {
       height: 50,
       child: DecoratedBox(
         decoration: BoxDecoration(
-            gradient:
-            LinearGradient(colors: [Colors.red, Colors.orange.shade700]),
-            // 渐变
-            borderRadius: BorderRadius.circular(3),
-            boxShadow: const [
-              // 阴影
-              BoxShadow(
-                  color: Colors.black54,
-                  offset: Offset(2.0, 2.0),
-                  blurRadius: 4.0)
-            ]),
+          gradient: LinearGradient(
+            colors: [Colors.red, Colors.orange.shade700],
+          ),
+          // 渐变
+          borderRadius: BorderRadius.circular(3),
+          boxShadow: const [
+            // 阴影
+            BoxShadow(
+              color: Colors.black54,
+              offset: Offset(2.0, 2.0),
+              blurRadius: 4.0,
+            ),
+          ],
+        ),
         child: Center(
           child: GestureDetector(
             onTap: () {
@@ -248,7 +255,9 @@ class _RouterNavigatorState extends State<RouterNavigator> {
                 Navigator.pushNamed(context, routeName);
               } else {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => page));
+                  context,
+                  MaterialPageRoute(builder: (context) => page),
+                );
               }
             },
             child: Transform.scale(scale: 1.5, child: Text(title)),
